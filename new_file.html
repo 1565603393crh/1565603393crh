@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		html,
+		body {
+
+			margin: 0;
+
+			padding: 0;
+		}
+
+		.background {
+
+			position:
+				absolute;
+
+			display:
+				block;
+
+			top: 0;
+
+			left: 0;
+
+			z-index:-1;
+			background-color: #ffebec;
+		}
+	</style>
+	<body>
+
+		<canvas class="background"></canvas>
+		<script src="../js/particle/particles.min.js"></script>
+	</body>
+	<script>
+		Particles.
+		init
+			({
+
+				// normal options
+				selector: '.background',
+				maxParticles: 450,
+				color: ['yellow','red','blue','green','purple'],
+				sizeVariations: 6,
+				minDistance:120,
+				connectParticles:false,
+				line_linked: {
+					//激活
+					enable: true,
+					//距离
+					distance: 50,
+					color: "#ffffff",
+					opacity: 0.6,
+					width: 1
+				},
+				// options for breakpoints
+				
+			});
+	</script>
+</html>

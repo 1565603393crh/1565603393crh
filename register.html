@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+	</head>
+	<script src="../js/jquery-3.4.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<style>
+         #alerts{
+			display: none;
+			text-align: center;
+		 }
+		.title {
+			position: relative;
+			top: -30px;
+			right: 60px;
+		}
+	</style>
+	<body>
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#example">
+		  注册
+		</button>
+		<div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">注册</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		    <div id="form">
+			<!-- <form action="register.php" method="post"> -->
+			
+			<div id="alerts" class=" alert alert-danger">
+                 
+                 </div>
+			
+				<div class="form-group">
+					
+						用户名：
+						<input type="text" name="usernames" id="usernames" class="form-control" />
+					
+				</div>
+				<div class="form-group">
+				
+						密码：
+						<input type="password" name="passwords" id="passwords" class="form-control" /></td>
+					
+				</div>
+				<div class="form-group">
+					
+						确认密码：
+					<input type="password" name="rpwd" id="rpwd" class="form-control" /></td>
+					
+				</div>
+			<p id="dl">已有账户？<a href="login.html" class="btn btn-link">去登陆</a></p>
+			<!-- </form> -->
+		</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+		        <input type="button" value="注册" name="sub" class="btn btn-success" id="zhuce" />
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+	</body>
+	<script>
+	var a=document.getElementById('alerts')
+		$('#zhuce').click(function() {
+			$.ajax({
+				type: 'post',
+				url: 'register.php',
+				dataType: 'json',
+				data: {
+					username: $('#usernames').val(),
+					password: $('#passwords').val(),
+					rpwd: $('#rpwd').val(),
+				},
+				success: function(res) {
+					console.log(res.info)
+					if (res.info == 0) {
+						//alert('用户名不能为空');
+						a.className="alert alert-danger"
+					} else if (res.info == 1) {
+						//alert('密码不能为空')
+						a.className="alert alert-danger"
+					} else if (res.info == 2) {
+						//alert('用户名已存在')
+						a.className="alert alert-danger"
+					} else if (res.info == 3) {
+						//alert('密码长度不足六位')
+						a.className="alert alert-danger"
+					} else if(res.info==4){
+						//alert('密码不一致')
+						a.className="alert alert-danger"
+					}else if(res.info==5){
+						//alert('注册失败')
+						a.className="alert alert-danger"
+					}else{
+						//alert('注册成功')
+						a.className="alert alert-success"
+					}
+					a.style.display="block"
+					a.innerHTML=res.msg
+				},
+				// error:function(msg){
+				// 	alert(msg)
+				// }
+
+			})
+		})
+	</script>
+</html>
